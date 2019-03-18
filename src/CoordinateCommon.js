@@ -35,9 +35,6 @@ class CoordinateCommon {
    */
   get() {
     return new EclipticCoordinate({
-      // l: this.Calculator.l.inRound().getDegrees(),
-      // b: this.Calculator.b.inRound(-90).getDegrees(),
-      // radius: this.Calculator.r,
       sc: this.Calculator.sc,
       centerMode: 'heliocentric',
       epoch: this.Calculator.obTime,

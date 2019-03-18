@@ -1,7 +1,7 @@
 {
-  "name": "@behaver/basic-star-coordinate",
+  "name": "@behaver/solar-star-coordinate",
   "version": "1.0.0",
-  "description": "This pkg is builded for calculating basic stars celestial coordinate.",
+  "description": "This pkg is builded for calculating solar stars celestial coordinate.",
   "main": "index.js",
   "directories": {
     "test": "test"
@@ -11,24 +11,24 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/behaver/basic-star-coordinate.git"
+    "url": "git+https://github.com/behaver/solar-star-coordinate.git"
   },
   "keywords": [
     "star",
     "coordinate"
   ],
   "author": "Sanwan, Dong",
-  "license": "MIT",
+  "license": "ISC",
   "bugs": {
-    "url": "https://github.com/behaver/basic-star-coordinate/issues"
+    "url": "https://github.com/behaver/solar-star-coordinate/issues"
   },
-  "homepage": "https://github.com/behaver/basic-star-coordinate#readme",
+  "homepage": "https://github.com/behaver/solar-star-coordinate#readme",
   "dependencies": {
     "@behaver/angle": "^2.0.2",
-    "@behaver/celestial-coordinate": "^1.4.0",
+    "@behaver/celestial-coordinate": "^1.5.1",
     "@behaver/jdate": "^2.3.0",
     "@behaver/pluto99-hecc": "^1.0.0",
-    "@behaver/solar-planets-hecc": "^1.0.2"
+    "@behaver/solar-planets-hecc": "^1.0.4"
   },
   "devDependencies": {
     "chai": "^4.2.0",
