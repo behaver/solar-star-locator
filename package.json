@@ -25,10 +25,10 @@
   "homepage": "https://github.com/behaver/solar-star-coordinate#readme",
   "dependencies": {
     "@behaver/angle": "^2.0.2",
-    "@behaver/celestial-coordinate": "^1.5.1",
+    "@behaver/celestial-coordinate": "^1.6.0",
     "@behaver/jdate": "^2.3.0",
-    "@behaver/pluto99-hecc": "^1.0.0",
-    "@behaver/solar-planets-hecc": "^1.0.4"
+    "@behaver/pluto99-hecc": "^1.0.1",
+    "@behaver/solar-planets-hecc": "^1.0.5"
   },
   "devDependencies": {
     "chai": "^4.2.0",
