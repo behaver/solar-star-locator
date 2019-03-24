@@ -24,14 +24,17 @@
   },
   "homepage": "https://github.com/behaver/solar-star-coordinate#readme",
   "dependencies": {
-    "@behaver/angle": "^2.0.2",
-    "@behaver/celestial-coordinate": "^1.6.0",
-    "@behaver/jdate": "^2.3.0",
-    "@behaver/pluto99-hecc": "^1.0.1",
-    "@behaver/solar-planets-hecc": "^1.0.5"
+    "@behaver/angle": "^2.0.3",
+    "@behaver/celestial-coordinate": "^1.6.2",
+    "@behaver/jdate": "^2.3.2",
+    "@behaver/pluto99-hecc": "^1.0.2",
+    "@behaver/solar-planets-hecc": "^1.0.6"
   },
   "devDependencies": {
     "chai": "^4.2.0",
     "mocha": "^5.2.0"
-  }
+  },
+  "files": [
+    "src"
+  ]
 }
