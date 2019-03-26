@@ -31,8 +31,8 @@ class SunCoordinate extends CoordinateCommon {
    */
   get() {
   	return new EclipticCoordinate({
-      l: (this.Calculator.l.inRound().getDegrees() + 180) % 360,
-      b: -this.Calculator.b.inRound(-90).getDegrees(),
+      l: this.Calculator.l.getDegrees() + 180,
+      b: -this.Calculator.b.getDegrees(),
       radius: this.Calculator.r,
       centerMode: 'geocentric',
       epoch: this.Calculator.obTime,
