@@ -25,7 +25,7 @@
   "homepage": "https://github.com/behaver/solar-star-coordinate#readme",
   "dependencies": {
     "@behaver/angle": "^2.0.3",
-    "@behaver/celestial-coordinate": "^1.6.4",
+    "@behaver/celestial-coordinate": "^1.7.0",
     "@behaver/elp2000-moon-gecc": "^1.0.2",
     "@behaver/jdate": "^2.3.2",
     "@behaver/pluto99-hecc": "^1.0.2",
