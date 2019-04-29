@@ -1,7 +1,7 @@
 {
-  "name": "@behaver/solar-star-coordinate",
+  "name": "@behaver/solar-star-position",
   "version": "1.1.0",
-  "description": "This pkg is builded for calculating solar stars celestial coordinate.",
+  "description": "This pkg is builded for calculating solar stars celestial position.",
   "main": "index.js",
   "directories": {
     "test": "test"
@@ -11,18 +11,18 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/behaver/solar-star-coordinate.git"
+    "url": "git+https://github.com/behaver/solar-star-position.git"
   },
   "keywords": [
     "star",
-    "coordinate"
+    "position"
   ],
   "author": "Sanwan, Dong",
   "license": "ISC",
   "bugs": {
-    "url": "https://github.com/behaver/solar-star-coordinate/issues"
+    "url": "https://github.com/behaver/solar-star-position/issues"
   },
-  "homepage": "https://github.com/behaver/solar-star-coordinate#readme",
+  "homepage": "https://github.com/behaver/solar-star-position#readme",
   "dependencies": {
     "@behaver/angle": "^2.0.3",
     "@behaver/celestial-coordinate": "^1.8.0",
