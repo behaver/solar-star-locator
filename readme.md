@@ -13,7 +13,7 @@ SolarStarPosition 依赖使用了底层的星体坐标计算模块，其中包�
 ## 用例
 
 ```js
-const { JupiterPosition } = require('@behaver/solar-star-coordinate');
+const { JupiterPosition } = require('@behaver/solar-star-position');
 const { JDateRepository } = require('@behaver/jdate');
 
 // 实例化儒略时间
