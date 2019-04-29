@@ -1,14 +1,14 @@
 'use strict';
 
 const expect = require("chai").expect;
-const PlutoCoordinate = require('../src/planets/Pluto');
+const PlutoPosition = require('../src/planets/Pluto');
 const { JDateRepository } = require('@behaver/jdate');
 
-describe('#PlutoCoordinate', () => {
+describe('#PlutoPosition', () => {
   describe('#verify', () => {
     it('天文算法 例36.a', () => {
       let jdate = new JDateRepository(2448908.5, 'jde');
-      let pluto = new PlutoCoordinate(jdate);
+      let pluto = new PlutoPosition({ time: jdate });
 
       let ECC = pluto.get();
 
