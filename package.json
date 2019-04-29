@@ -1,6 +1,6 @@
 {
   "name": "@behaver/solar-star-coordinate",
-  "version": "1.0.7",
+  "version": "1.1.0",
   "description": "This pkg is builded for calculating solar stars celestial coordinate.",
   "main": "index.js",
   "directories": {
