@@ -1,41 +1,40 @@
 'use strict';
 
 const { EarthHECC, MarsHECC } = require('@behaver/solar-planets-hecc');
-const CommonPosition = require('../CommonPosition');
+const SolarStarLocator = require('../SolarStarLocator');
 const LightTimeEffect = require('../LightTimeEffect');
 
 /**
- * MarsPosition
+ * MarsLocator
  * 
  * 火星坐标计算组件
  *
  * @author 董 三碗 <qianxing@yeah.net>
- * @version 1.0.0
  */
-class MarsPosition extends CommonPosition {
+class MarsLocator extends SolarStarLocator {
 
   /**
    * 构造函数
    * 
-   * @param {JDateRepository} options.time                参考时间
-   * @param {Boolean}         options.withLightTimeEffect 考虑光行时修正
+   * @param {Boolean} options 定位参数项
    */
-  constructor({
-    time,
-    withLightTimeEffect,
-  }) {
-    super({
-      withLightTimeEffect,
-    });
+  constructor(options = {}) {
+    super();
+
+    // 初始化参数
+    this.private.id = 'mars';
 
     // 构造火星日心黄经坐标计算对象
-    this.Calculator = new MarsHECC(time);
+    this.Calculator = new MarsHECC;
+
+    // 构造光行时计算对象
     this.LightTimeEffect = new LightTimeEffect({
-      time: this.time,
-      originPositionProvider: new EarthHECC(time),
-      planetPositionProvider: new MarsHECC(time),
+      originPositionProvider: new EarthHECC,
+      planetPositionProvider: new MarsHECC,
     });
+
+    this.options(options);
   }
 }
 
-module.exports = MarsPosition;
+module.exports = MarsLocator;

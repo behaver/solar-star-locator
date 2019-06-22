@@ -31,7 +31,7 @@ class LightTimeEffect {
     this.OriginPositionProvider = originPositionProvider;
     this.PlanetPositionProvider = planetPositionProvider;
 
-    this.time = time;
+    this.time = time ? time : new JDateRepository;
     this.accuracy = accuracy || 0.00001; // 默认精度 < 1秒
   }
 
@@ -85,6 +85,9 @@ class LightTimeEffect {
     let JDate = this.time,
         OriginPositionProvider = this.OriginPositionProvider,
         PlanetPositionProvider = this.PlanetPositionProvider;
+
+    OriginPositionProvider.obTime = new JDateRepository(JDate.JD);
+    PlanetPositionProvider.obTime = new JDateRepository(JDate.JD);
 
     // 获取直角坐标
     let dist = 0,

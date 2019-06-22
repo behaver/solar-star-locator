@@ -1,41 +1,40 @@
 'use strict';
 
 const { EarthHECC, MercuryHECC } = require('@behaver/solar-planets-hecc');
-const CommonPosition = require('../CommonPosition');
+const SolarStarLocator = require('../SolarStarLocator');
 const LightTimeEffect = require('../LightTimeEffect');
 
 /**
- * MercuryPosition
+ * MercuryLocator
  * 
  * 水星坐标计算组件
  *
  * @author 董 三碗 <qianxing@yeah.net>
- * @version 1.0.0
  */
-class MercuryPosition extends CommonPosition {
+class MercuryLocator extends SolarStarLocator {
 
   /**
    * 构造函数
    * 
-   * @param {JDateRepository} options.time                参考时间
-   * @param {Boolean}         options.withLightTimeEffect 考虑光行时修正
+   * @param {Boolean} options 定位参数项
    */
-  constructor({
-    time,
-    withLightTimeEffect,
-  }) {
-    super({
-      withLightTimeEffect,
-    });
+  constructor(options = {}) {
+    super();
+
+    // 初始化参数
+    this.private.id = 'mercury';
 
     // 构造水星日心黄经坐标计算对象
-    this.Calculator = new MercuryHECC(time);
+    this.Calculator = new MercuryHECC;
+
+    // 构造光行时计算对象
     this.LightTimeEffect = new LightTimeEffect({
-      time: this.time,
-      originPositionProvider: new EarthHECC(time),
-      planetPositionProvider: new MercuryHECC(time),
+      originPositionProvider: new EarthHECC,
+      planetPositionProvider: new MercuryHECC,
     });
+
+    this.options(options);
   }
 }
 
-module.exports = MercuryPosition;
+module.exports = MercuryLocator;

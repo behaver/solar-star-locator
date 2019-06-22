@@ -2,73 +2,75 @@
 
 const MoonGECC = require('@behaver/elp2000-moon-gecc');
 const { EclipticCoordinate } = require('@behaver/celestial-coordinate');
-const CommonPosition = require('../CommonPosition');
+const SolarStarLocator = require('../SolarStarLocator');
 const LightTimeEffect = require('../LightTimeEffect');
 const { SphericalCoordinate3D } = require('@behaver/coordinate');
 
 /**
- * MoonPosition
+ * MoonLocator
  * 
  * 月球坐标计算组件
  *
  * @author 董 三碗 <qianxing@yeah.net>
- * @version 1.0.0
  */
-class MoonPosition extends CommonPosition {
+class MoonLocator extends SolarStarLocator {
 
   /**
    * 构造函数
    * 
-   * @param {JDateRepository} options.time                参考时间
-   * @param {Boolean}         options.withLightTimeEffect 考虑光行时修正
+   * @param {Boolean} options 定位参数项
    */
-  constructor({
-    time,
-    withLightTimeEffect,
-  }) {
-    super({
-      withLightTimeEffect,
-    });
+  constructor(options = {}) {
+    super();
+
+    // 初始化参数
+    this.private.id = 'moon';
 
     // 构造月球地心黄经坐标计算对象
-    this.Calculator = new MoonGECC(time);
+    this.Calculator = new MoonGECC;
 
+    // 构造光行时计算对象
     this.LightTimeEffect = new LightTimeEffect({
-      time: this.time,
       originPositionProvider: { 
         sc: new SphericalCoordinate3D(0, 0, 0), 
       },
-      planetPositionProvider: new MoonGECC(time),
+      planetPositionProvider: new MoonGECC,
     });
+
+    this.options(options);
   }
 
   /**
    * 获取计算结果
    * 
-   * @return {EclipticCoordinate} 黄道天球坐标对象
+   * @param  {Object} options 定位参数项
+   * 
+   * @return {Object}         定位结果集
    */
-  get() {
-    let sc;
+  get(options = {}) {
 
-    // 光行时修正
-    if (this.withLightTimeEffect) {
-      this.LightTimeEffect.time = this.time;
-      let lte_res = this.LightTimeEffect.calc();
-      sc = lte_res.sc;
-    } else {
-      sc = this.Calculator.sc;
-    }
+    this.options(options);
 
+    let withLTE = this.withLTE;
 
-    return new EclipticCoordinate({
+    let sc = (withLTE) ? this.LightTimeEffect.calc().sc : this.Calculator.sc;
+
+    let coord = new EclipticCoordinate({
       sc,
       centerMode: 'geocentric',
-      epoch: this.Calculator.obTime,
+      epoch: this.time,
       withNutation: false,
       enableAnnualAberration: false,
       withAnnualAberration: true,
     });
+
+    return {
+      id: this.id,
+      time: this.time,
+      coord,
+      withLTE,
+    }
   }
 }
 
-module.exports = MoonPosition;
+module.exports = MoonLocator;

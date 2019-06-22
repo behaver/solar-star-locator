@@ -2,71 +2,77 @@
 
 const { EarthHECC } = require('@behaver/solar-planets-hecc');
 const { EclipticCoordinate } = require('@behaver/celestial-coordinate');
-const CommonPosition = require('../CommonPosition');
+const SolarStarLocator = require('../SolarStarLocator');
 const LightTimeEffect = require('../LightTimeEffect');
 const { SphericalCoordinate3D } = require('@behaver/coordinate');
 
 /**
- * SunPosition
+ * SunLocator
  * 
  * 太阳位置计算组件
  *
  * @author 董 三碗 <qianxing@yeah.net>
- * @version 1.0.0
  */
-class SunPosition extends CommonPosition {
+class SunLocator extends SolarStarLocator {
 
   /**
    * 构造函数
    * 
-   * @param {JDateRepository} options.time                参考时间
-   * @param {Boolean}         options.withLightTimeEffect 考虑光行时修正
+   * @param {Boolean} options 定位参数项
    */
-  constructor({
-    time,
-    withLightTimeEffect,
-  }) {
-    super({
-      withLightTimeEffect,
-    });
+  constructor(options = {}) {
+    super();
+
+    // 初始化参数
+    this.private.id = 'sun';
 
     // 构造地球日心黄经坐标计算对象
-    this.Calculator = new EarthHECC(time);
+    this.Calculator = new EarthHECC;
+
+    // 构造光行时计算对象
     this.LightTimeEffect = new LightTimeEffect({
-      time: this.time,
       originPositionProvider: {
         sc: new SphericalCoordinate3D(0, 0, 0),        
       },
-      planetPositionProvider: new EarthHECC(time),
+      planetPositionProvider: new EarthHECC,
     });
+
+    this.options(options);
   }
 
   /**
    * 获取计算结果
    * 
-   * @return {EclipticCoordinate} 黄道天球坐标对象
+   * @param  {Object} options 定位参数项
+   * 
+   * @return {Object}         定位结果集
    */
-  get() {
-    let sc;
+  get(options = {}) {
 
-    if (this.withLightTimeEffect) {
-      let lte_res = this.LightTimeEffect.calc();
-      sc = lte_res.sc;
-    } else {
-      sc = this.Calculator.sc;
-    }
+    this.options(options);
+
+    let withLTE = this.withLTE;
+
+    let sc = (withLTE) ? this.LightTimeEffect.calc().sc : this.Calculator.sc;
 
     // 对称转换地球日心坐标为太阳地心坐标
     sc.phi = sc.phi + Math.PI;
     sc.theta = Math.PI - sc.theta;
 
-  	return new EclipticCoordinate({
+  	let coord = new EclipticCoordinate({
       sc,
       centerMode: 'geocentric',
-      epoch: this.Calculator.obTime,
+      epoch: this.time,
       withNutation: false,
     });
+
+    return {
+      id: this.id,
+      time: this.time,
+      coord,
+      withLTE,
+    }
   }
 }
 
-module.exports = SunPosition;
+module.exports = SunLocator;

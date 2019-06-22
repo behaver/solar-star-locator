@@ -1,41 +1,40 @@
 'use strict';
 
 const { EarthHECC, JupiterHECC } = require('@behaver/solar-planets-hecc');
-const CommonPosition = require('../CommonPosition');
+const SolarStarLocator = require('../SolarStarLocator');
 const LightTimeEffect = require('../LightTimeEffect');
 
 /**
- * JupiterPosition
+ * JupiterLocator
  * 
  * 木星坐标计算组件
  *
  * @author 董 三碗 <qianxing@yeah.net>
- * @version 1.0.0
  */
-class JupiterPosition extends CommonPosition {
+class JupiterLocator extends SolarStarLocator {
 
   /**
    * 构造函数
    * 
-   * @param {JDateRepository} options.time                参考时间
-   * @param {Boolean}         options.withLightTimeEffect 考虑光行时修正
+   * @param {Boolean} options 定位参数项
    */
-  constructor({
-    time,
-    withLightTimeEffect,
-  }) {
-    super({
-      withLightTimeEffect,
-    });
+  constructor(options = {}) {
+    super();
+
+    // 初始化参数
+    this.private.id = 'jupiter';
 
     // 构造木星日心黄经坐标计算对象
-    this.Calculator = new JupiterHECC(time);
+    this.Calculator = new JupiterHECC;
+
+    // 构造光行时计算对象
     this.LightTimeEffect = new LightTimeEffect({
-      time: this.time,
-      originPositionProvider: new EarthHECC(time),
-      planetPositionProvider: new JupiterHECC(time),
+      originPositionProvider: new EarthHECC,
+      planetPositionProvider: new JupiterHECC,
     });
+
+    this.options(options);
   }
 }
 
-module.exports = JupiterPosition;
+module.exports = JupiterLocator;
